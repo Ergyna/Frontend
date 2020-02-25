@@ -1,2 +1,2 @@
-# shayna-vue
+# Shayna-Vue
 Project Aplikasi Vue - Frontend
