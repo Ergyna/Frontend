@@ -1,10 +1,17 @@
 steps:
-- name: node:14
-  entrypoint: npm
-  args: ['install', '--legacy-peer-deps']
-- name: node:14
-  entrypoint: sh
-  args: ['-c', 'npm run build']
-- name: gcr.io/cloud-builders/gcloud
-  args: ['app', 'deploy']
-  timeout: 1800s
+  # Install dependencies
+  - name: 'node:16'
+    entrypoint: npm
+    args: ['install']
+    dir: 'app'
+
+  # Build the app
+  - name: 'node:16'
+    entrypoint: npm
+    args: ['run', 'build']
+    dir: 'app'
+
+  # Deploy to App Engine
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['app', 'deploy', '--quiet']
+    dir: 'app'
